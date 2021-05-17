@@ -1,4 +1,4 @@
-package modelo;
+package modelo.ser;
 
 import java.util.Observable;
 import java.util.Observer;

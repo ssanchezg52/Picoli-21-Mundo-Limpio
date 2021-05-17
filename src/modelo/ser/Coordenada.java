@@ -1,4 +1,4 @@
-package modelo;
+package modelo.ser;
 
 public class Coordenada {
 	private float posX,posY;

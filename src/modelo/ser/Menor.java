@@ -1,4 +1,4 @@
-package modelo;
+package modelo.ser;
 
 public class Menor implements Comportamiento{
 	public float factorDesarrollo;

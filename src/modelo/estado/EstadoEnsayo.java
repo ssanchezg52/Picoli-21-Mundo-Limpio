@@ -1,9 +1,11 @@
-package modelo;
+package modelo.estado;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
+
+import modelo.ser.Ser;
 
 public class EstadoEnsayo {
 	public ArrayList<Ser> seres = new ArrayList<>();

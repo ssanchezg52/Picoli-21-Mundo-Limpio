@@ -1,4 +1,6 @@
-package modelo;
+package ensayos;
+
+import modelo.estado.EstadoEnsayo;
 
 public class EnsayoEstado {
 
