@@ -1,4 +1,4 @@
-package modelo.estado;
+package ensayos;
 
 import java.util.ArrayList;
 import java.util.Iterator;

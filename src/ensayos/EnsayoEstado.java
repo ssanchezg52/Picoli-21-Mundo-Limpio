@@ -1,7 +1,5 @@
 package ensayos;
 
-import modelo.estado.EstadoEnsayo;
-
 public class EnsayoEstado {
 
 	public static void main(String[] args) {

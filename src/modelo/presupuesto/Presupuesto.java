@@ -5,9 +5,9 @@ import modelo.ser.Adulto;
 import modelo.ser.Edades;
 
 public class Presupuesto {
-	Sector menores, ancianos, trabajadores;
-	ArrayList<Sector> sectores = new ArrayList();
-	public long parados;
+	private Sector menores, ancianos, trabajadores;
+	private ArrayList<Sector> sectores = new ArrayList<Sector>();
+	private long parados;
 
 	public Presupuesto(long cantidadMenores, long cantidadAncianos, 
 			long cantidadTrabajadores, ArrayList<Adulto> parados) {
@@ -38,12 +38,7 @@ public class Presupuesto {
 		}
 	}
 	
-	private float calculaPorcentaje(long cantidad, long diferencia) {
-		float abs = Math.abs((float) diferencia / cantidad);
-		return abs;
-	}
-
-	private long getTotal() {
+	public long getTotal() {
 		long total = 0;
 		for (Sector sector : sectores) {
 			total += sector.getCantidadCorregida();
