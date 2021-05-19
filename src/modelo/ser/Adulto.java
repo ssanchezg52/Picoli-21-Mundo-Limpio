@@ -19,8 +19,20 @@ public class Adulto implements Comportamiento {
 	}
 
 	private float recalcularEsperanzaDeVida(int necesidadVitalSatisfecha, float esperanzaVida) {
-		// TODO Auto-generated method stub
-		return 0;
+		double acumulador = 0;
+		double factorUno = 1;
+		if (necesidadVitalSatisfecha != 0) {
+			for (int i = 99; i >= necesidadVitalSatisfecha; i--) {
+				acumulador = (acumulador + (factorUno / Edades.adulto.getNecesidadVital()));
+			}
+		}else {
+			acumulador = 1.00;
+		}
+		return esperanzaVida - (float) acumulador;
+	}
+	
+	public long getAhorro() {
+		return this.ahorro;
 	}
 
 	public long calculaNecesidad() {

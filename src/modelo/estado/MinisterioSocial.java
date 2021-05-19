@@ -11,18 +11,26 @@ public class MinisterioSocial {
 	private final ArrayList<Ser> menores = new ArrayList<>();
 	private final ArrayList<Ser> ancianos = new ArrayList<>();
 	
-	private void naceSer() {
+	public void naceSer() {
 		this.menores.add(new Ser());
 
 	}
 	
-	public void establecerNacimientos(long trabajadoresFaltantes) {
-		for (int i = 0; i < trabajadoresFaltantes; i++) {
+	public void establecerNacimientos(long cantidad) {
+		for (int i = 0; i < cantidad; i++) {
 			naceSer();
 		}
 		
 	}
 	
+	public long getMenoresSize() {
+		return this.menores.size();
+	}
+	
+	public long getAncianosSize() {
+		return this.ancianos.size();
+	}
+	//TODO PAGOS
 	
 	
 

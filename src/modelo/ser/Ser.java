@@ -1,7 +1,8 @@
 package modelo.ser;
 
-import java.util.Observable;
+
 import java.util.Observer;
+
 
 import utiles.Utiles;
 
@@ -10,6 +11,7 @@ public class Ser {
 	private static final int vidaMin = 0;
 	private MyObservable aAdultos = new MyObservable();
 	private MyObservable aAnciano = new MyObservable();
+	private MyObservable aEstado = new MyObservable();
 	protected float esperanzaVida;
 	protected int edad;
 	private Comportamiento comportamiento;
@@ -27,14 +29,18 @@ public class Ser {
 	public boolean envejecer() {
 		this.edad++;
 		if (this.pasaAAdulto()) {
-			// TODO hay que comprobar la viabilidad del menor
-			this.comportamiento = new Adulto();
+			if (((Menor)comportamiento).isViable()) {
+				comportamiento = new Adulto();
+			}else {
+				this.edad = (int) esperanzaVida +1;
+			}
+			comportamiento = new Adulto();
 			this.aAdultos.notifica(this);
 		}
 		if (this.pasaAAnciano()) {
 			// Una solucion para no tener clases sin propiedades
 			// son los objetos anonimos
-			//TODO quitar dinero al adulto antes de que se jubile
+			this.aEstado.notifica(comportamiento);
 			this.comportamiento = new Comportamiento() {
 
 				@Override
@@ -102,6 +108,11 @@ public class Ser {
 	public void addAncianoObserver(Observer obj) {
 		aAnciano.addObserver(obj);
 
+	}
+	
+	public void addEstadoObserver(Observer obj) {
+		aEstado.addObserver(obj);
+		
 	}
 
 	public Comportamiento getComportamiento() {

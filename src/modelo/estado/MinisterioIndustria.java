@@ -2,6 +2,7 @@ package modelo.estado;
 
 import java.util.ArrayList;
 
+import modelo.ser.Adulto;
 import modelo.ser.Ser;
 
 //Se encarga de los trabajadores y parados
@@ -24,6 +25,24 @@ public class MinisterioIndustria {
 			this.trabajadores.remove(i);
 		}
 		
+	}
+	
+	public long getProduccionPotencial(int potenciaTrabajador) {
+		return trabajadores.size() * potenciaTrabajador;
+	}
+	
+	public ArrayList<Adulto> getParados() {
+		//NEED TEST
+		ArrayList<Adulto> adultoParados = new ArrayList<>();
+		for (Ser ser : parados) {
+			adultoParados.add((Adulto)ser.getComportamiento());
+			
+		}
+		return adultoParados;
+	}
+	
+	public long getTrabajadoresSize() {
+		return this.trabajadores.size();
 	}
 	
 	public long calculamosProduccionPeriodica() {
