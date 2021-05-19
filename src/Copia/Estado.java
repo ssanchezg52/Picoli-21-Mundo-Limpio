@@ -1,10 +1,7 @@
-package presentador;
+package Copia;
 
 import java.util.ArrayList;
 
-import modelo.estado.MinisterioHacienda;
-import modelo.estado.MinisterioIndustria;
-import modelo.estado.MinisterioSocial;
 import modelo.presupuesto.Presupuesto;
 import modelo.ser.Adulto;
 import modelo.ser.Ser;
@@ -27,14 +24,8 @@ public class Estado {
 	private final ArrayList<Ser> ancianos = new ArrayList<>();
 	private final ArrayList<Ser> trabajadores = new ArrayList<>();
 	private final ArrayList<Ser> parados = new ArrayList<>();
-	MinisterioHacienda ministerioHacienda;
-	MinisterioIndustria ministerioIndustria;
-	MinisterioSocial ministerioSocial;
 
 	public Estado(long demanda) {
-		this.ministerioHacienda = new MinisterioHacienda();
-		this.ministerioIndustria = new MinisterioIndustria();
-		this.ministerioSocial = new MinisterioSocial();
 		for (int i = 0; i < demanda / potenciaTrabajador; i++) {
 			naceSer();
 		}
@@ -50,9 +41,9 @@ public class Estado {
 	private void comenzarPeriodo() {
 		// TODO Auto-generated method stub
 		long trabajadoresNecesarios=demanda-getProduccionPotencial();
-		this.ministerioIndustria.contratar(trabajadoresNecesarios);
+		contratar(trabajadoresNecesarios);
 		long trabajadoresFaltantes=trabajadoresNecesarios-trabajadores.size();
-		this.ministerioSocial.establecerNacimientos(trabajadoresFaltantes);
+		establecerNacimientos(trabajadoresFaltantes);
 	}
 
 	private void establecerNacimientos(long trabajadoresFaltantes) {
@@ -72,7 +63,7 @@ public class Estado {
 
 	private void terminarPeriodo() {
 		// TODO Auto-generated method stub
-		capital+=this.ministerioIndustria.calculamosProduccionPeriodica();
+		capital+=calculamosProduccionPeriodica();
 		capital-=pagarCostesFabricacion();
 		Presupuesto presupuesto=new Presupuesto(menores.size(), ancianos.size(), trabajadores.size(), 
 				getParados());
