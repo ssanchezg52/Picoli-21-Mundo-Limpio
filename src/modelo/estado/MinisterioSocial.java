@@ -1,7 +1,9 @@
 package modelo.estado;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Stack;
 
 import modelo.ser.Ser;
 
@@ -13,7 +15,6 @@ public class MinisterioSocial {
 	
 	public void naceSer() {
 		this.menores.add(new Ser());
-
 	}
 	
 	public void establecerNacimientos(long cantidad) {
@@ -30,7 +31,42 @@ public class MinisterioSocial {
 	public long getAncianosSize() {
 		return this.ancianos.size();
 	}
-	//TODO PAGOS
+	
+	public ArrayList<Ser> getMenores() {
+		return menores;
+	}
+
+	public ArrayList<Ser> getAncianos() {
+		return ancianos;
+	}
+
+	public void alimentarMenores(long sueldo) {
+		for (Ser ser : menores) {
+			ser.vivir((int) (sueldo / this.getMenoresSize()));
+		}
+		
+	}
+
+	public void alimentarAncianos(long sueldo) {
+		for (Ser ser : ancianos) {
+			ser.vivir((int) (sueldo / this.getAncianosSize()));
+		}
+		
+	}
+
+	public void alimentarParados(long sueldo, ArrayDeque<Ser> parados) {
+		for (Ser ser : parados) {
+			ser.vivir((int) (sueldo / parados.size()));
+		}
+		
+	}
+
+	public void alimentarTrabajadores(long sueldo, Stack<Ser> trabajadores) {
+		for (Ser ser : trabajadores) {
+			ser.vivir((int) (sueldo / trabajadores.size()));
+		}
+		
+	}
 	
 	
 

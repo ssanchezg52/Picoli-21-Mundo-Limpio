@@ -1,6 +1,8 @@
 package modelo.estado;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Stack;
 
 import modelo.ser.Adulto;
 import modelo.ser.Ser;
@@ -9,31 +11,31 @@ import modelo.ser.Ser;
 //porque se encarga de contratar y despedir
 public class MinisterioIndustria {
 
-	private final ArrayList<Ser> trabajadores = new ArrayList<>();
-	private final ArrayList<Ser> parados = new ArrayList<>();
+	private final Stack<Ser> trabajadores = new Stack<>();
+	private final ArrayDeque<Ser> parados = new ArrayDeque<>();
 	
 	public void contratar(long trabajadoresNecesarios) {
 		for (int i = 0; i < trabajadoresNecesarios; i++) {
-			this.trabajadores.add(this.parados.get(i));
-			this.parados.remove(i);
+			Ser ser = this.parados.pop();
+			this.trabajadores.push(ser);
 		}
 	}
 	
 	public void despedir(long trabajadoresNecesarios) {
 		for (int i = 0; i < trabajadoresNecesarios; i++) {
-			this.parados.add(this.trabajadores.get(i));
-			this.trabajadores.remove(i);
+			Ser ser = this.trabajadores.pop();
+			this.parados.push(ser);
 		}
 		
 	}
 	
 	public long getProduccionPotencial(int potenciaTrabajador) {
-		return trabajadores.size() * potenciaTrabajador;
+		return (trabajadores.size() + parados.size()) * potenciaTrabajador;
 	}
 	
 	public ArrayList<Adulto> getParados() {
 		//NEED TEST
-		ArrayList<Adulto> adultoParados = new ArrayList<>();
+		ArrayList<Adulto> adultoParados = new ArrayList<Adulto>();
 		for (Ser ser : parados) {
 			adultoParados.add((Adulto)ser.getComportamiento());
 			
@@ -41,12 +43,19 @@ public class MinisterioIndustria {
 		return adultoParados;
 	}
 	
+	public ArrayDeque<Ser> getParadosSer() {
+		return this.parados;
+	}
+	
 	public long getTrabajadoresSize() {
 		return this.trabajadores.size();
 	}
 	
-	public long calculamosProduccionPeriodica() {
-		// TODO Auto-generated method stub
-		return 0;
+	public long calculamosProduccionPeriodica(int potenciaTrabajador) {
+		return trabajadores.size() * potenciaTrabajador;
+	}
+
+	public Stack<Ser> getTrabajadores() {
+		return trabajadores;
 	}
 }

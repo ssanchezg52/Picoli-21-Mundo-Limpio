@@ -26,6 +26,22 @@ public class MinisterioHacienda {
 		return this.presupuesto.getTotal();
 		
 	}
+
+	public long getCantidadMenores() {
+		return this.presupuesto.getPagoMenores();
+	}
+
+	public long getCantidadAncianos() {
+		return this.presupuesto.getPgoAncianos();
+	}
+
+	public long getCantidadParados() {
+		return this.presupuesto.getPagoParados();
+	}
+
+	public long getCantidadTrabajadores() {
+		return this.presupuesto.getPagoTrabajadores();
+	}
 	
 	
 }

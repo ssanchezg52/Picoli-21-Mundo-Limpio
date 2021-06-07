@@ -22,7 +22,6 @@ public class Estado {
 	private int potenciaTrabajador = 450;
 	// dinero que tiene el estado o deuda
 	private long capital = 0;
-	private final ArrayList<Ser> seres = new ArrayList<>();
 	MinisterioHacienda ministerioHacienda;
 	MinisterioIndustria ministerioIndustria;
 	MinisterioSocial ministerioSocial;
@@ -31,9 +30,7 @@ public class Estado {
 		this.ministerioHacienda = new MinisterioHacienda();
 		this.ministerioIndustria = new MinisterioIndustria();
 		this.ministerioSocial = new MinisterioSocial();
-		for (int i = 0; i < demanda / potenciaTrabajador; i++) {
-			this.ministerioSocial.naceSer();
-		}
+		this.ministerioSocial.establecerNacimientos(demanda/potenciaTrabajador);
 		// Esto es la historia
 		int historia = 0;
 		do {
@@ -53,7 +50,7 @@ public class Estado {
 
 	private void terminarPeriodo() {
 		// TODO Auto-generated method stub
-		capital+=this.ministerioIndustria.calculamosProduccionPeriodica();
+		capital+=this.ministerioIndustria.calculamosProduccionPeriodica(potenciaTrabajador);
 		capital-=pagarCostesFabricacion();
 		this.ministerioHacienda.generarPresupuesto(this.ministerioSocial.getMenoresSize(), this.ministerioSocial.getAncianosSize(), 
 				this.ministerioIndustria.getTrabajadoresSize(), this.ministerioIndustria.getParados());
@@ -63,18 +60,13 @@ public class Estado {
 	}
 
 	private void envejecer() {
-		
-		
+		this.ministerioSocial.alimentarMenores(this.ministerioHacienda.getCantidadMenores());
+		this.ministerioSocial.alimentarAncianos(this.ministerioHacienda.getCantidadAncianos());
+		this.ministerioSocial.alimentarTrabajadores(this.ministerioHacienda.getCantidadTrabajadores(),this.ministerioIndustria.getTrabajadores());
+		this.ministerioSocial.alimentarParados(this.ministerioHacienda.getCantidadParados(), this.ministerioIndustria.getParadosSer());
 	}
-
-	
 
 	private long pagarCostesFabricacion() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	private long calculamosProduccionPeriodica() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
